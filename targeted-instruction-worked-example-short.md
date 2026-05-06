@@ -1,6 +1,6 @@
 # Worked Example: Targeted Instruction (Short)
 
-This is a short worked example of how the broader method looked for targeted instruction: teaching or grouping students by their current learning level rather than by grade alone.
+This is a worked example of how the broader method looked for targeted instruction: teaching or grouping students by their current learning level rather than by grade alone.
 
 For the exact term lists and prompts, see [How We Defined Each Smart Buy](smart-buy-definitions.md).
 
