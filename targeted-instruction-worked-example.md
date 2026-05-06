@@ -1,141 +1,70 @@
 # Worked Example: Targeted Instruction
 
-This page gives a step-by-step example of how the broader method looked for mentions of targeted instruction in the plan corpus.
+This is a short worked example of how the broader method looked for targeted instruction: teaching or grouping students by their current learning level rather than by grade alone.
 
-## 1. Split Each Document Into Chunks
+This page is meant as an overview, not a full technical appendix. For the exact term lists and prompts, see [How We Defined Each Smart Buy](smart-buy-definitions.md).
 
-Each plan is split into overlapping chunks of text:
+## 1. Retrieve promising chunks of text
 
-- roughly `2200` characters per chunk
-- roughly `250` characters of overlap
+Each plan is split into overlapping chunks of text, roughly paragraph-sized.
 
-This makes long plans easier to search and helps preserve nearby context when a relevant passage falls near a chunk boundary.
+For targeted instruction, each chunk is scored in two ways:
 
-## 2. Score Each Chunk In Two Ways
+- **Weighted lexical cues.** Stronger phrases get more weight than weaker ones.
+- **Semantic similarity.** The method also looks for chunks that are close in meaning to short query phrases, even if they do not use the exact wording.
 
-### 2a. Lexical Score
+Examples of stronger lexical cues include:
 
-Each chunk gets a weighted lexical score based on search terms.
+- English: `TaRL`, `teaching at the right level`, `grouped by learning level`, `level-appropriate`
+- French: `enseignement au bon niveau`, `regroupement des élèves par niveau`, `par niveau d’apprentissage`
 
-`lexical score = sum of (term weight × number of matches in that chunk)`
+Examples of weaker cues include:
 
-Strong terms get more weight than weaker ones.
+- English: `catch-up`, `remedial`
+- French: `instruction ciblée par niveau`, `niveaux d’apprentissage`
 
-#### English lexical cues
-
-High-weight terms:
-
-- `TaRL`
-- `teaching at the right level`
-- `grouped/grouping by learning level`
-- `level-appropriate`
-
-Medium-weight terms:
-
-- `learning level`
-- `ability grouping`
-
-Low-weight terms:
-
-- `catch-up`
-- `remedial`
-
-#### French lexical cues
-
-High-weight terms:
-
-- `enseignement au bon niveau`
-- `groupes de niveau`
-- `regroupement des élèves par niveau`
-- `par niveau d’apprentissage`
-- `selon leur niveau d’apprentissage`
-
-Medium-weight terms:
-
-- `niveaux d’apprentissage`
-- `instruction ciblée par niveau`
-- `groupes de niveau`
-
-This is only a retrieval score. A high lexical score does not by itself make a document a true hit.
-
-### 2b. Semantic Similarity Score
-
-Each chunk also gets a semantic similarity score. This is based on embeddings rather than exact wording.
-
-The method creates:
-
-- an embedding vector for each chunk
-- an embedding vector for a small number of short query phrases
-
-It then checks which chunk vectors are closest in meaning to the query vectors.
-
-The embedding model is doing the representation step here. The closeness check itself is ordinary vector math.
-
-#### English query phrases
+Examples of semantic query phrases include:
 
 - `Teaching at the Right Level TaRL grouping students by assessed learning level rather than grade`
-- `targeted instruction after assessment with regrouping by current learning level`
-
-#### French query phrases
-
 - `enseignement au bon niveau avec regroupement des eleves par niveau d apprentissage plutot que par classe`
-- `instruction ciblee fondee sur une evaluation diagnostique et un regroupement par niveau`
 
-This is still retrieval, not the final judgment.
+The semantic step uses embeddings: the model turns both chunks and query phrases into vectors, and the method then keeps the chunks whose vectors are closest in meaning.
 
-## 3. Decide Which Chunks Go To The LLM
+## 2. Keep only the top-ranked chunks
 
 There is no single semantic-score cutoff such as “everything above 0.7 passes.”
 
-Instead, the method keeps the highest-ranked chunks:
+Instead, the method keeps:
 
-- the top `8` lexical hits with lexical score above zero
-- the top `8` semantic hits
-- the union of those chunks, reranked using `lexical score + semantic score`
+- the top lexical hits
+- the top semantic hits
+- the union of those hits, reranked using the combined retrieval score
 - neighboring chunks for context
 
-At most `10` chunks are then sent to the LLM for that category.
+Only a small number of the highest-ranked chunks are then sent to the LLM.
 
-So the cutoff is mostly rank-based rather than threshold-based.
+## 3. Ask the LLM to make the judgment
 
-## 4. Ask The LLM To Make The Judgment
+The LLM does not read the whole plan from scratch. It only reads the retrieved chunks and decides whether they really describe targeted instruction by learning level.
 
-Only after retrieval does the LLM decide whether the selected text really describes targeted instruction by learning level.
+The English rule is:
 
-### English rule
+- count `TRUE` only when the text clearly describes targeted instruction by learning level rather than by grade alone
 
-Count a chunk as `TRUE` only when it clearly describes targeted instruction by learning level rather than by grade alone.
+The French rule is slightly stricter:
 
-Definition used:
+- count `TRUE` only when teaching or student grouping is explicitly organized by assessed learning level
+- do **not** count generic remediation, catch-up support, screening, or diagnostic assessment on their own
 
-`Targeted instruction by learning level (TaRL-style), not by grade only.`
+## 4. Verification step
 
-### French rule
-
-Count a chunk as `TRUE` only when teaching or student grouping is explicitly organized by assessed learning level rather than age or grade alone.
-
-Definition used:
-
-`Targeted instruction by learning level (TaRL-style), not generic remediation or catch-up support.`
-
-Important French hard negatives:
-
-- generic remediation or catch-up support
-- screening or diagnostic assessment alone
-- support for struggling students without regrouping by learning level
-- catch-up classes delivered by grade, not by current learning level
-
-## 5. Verification Step
-
-A cheaper model, `gpt-4.1-mini`, does the first pass.
-
-A stronger model, `gpt-4.1`, then re-checks:
+A cheaper model does the first pass, and a stronger model re-checks:
 
 - all positives
-- any negatives with confidence below `0.60`
+- negatives with low confidence
 
-The model must also provide a short verbatim quote from the retrieved text as evidence. If the quote is not actually present in the retrieved chunks, the hit is rejected.
+The model must give a short verbatim quote from the retrieved text as evidence. If the quote is not actually present in the retrieved chunks, the hit is rejected.
 
-## Plain-English Summary
+## Plain-English takeaway
 
-For targeted instruction, the broader method does not ask the LLM to read the whole plan from scratch. It first uses weighted search terms and embedding-based similarity to find the most relevant chunk-sized passages. The LLM then judges only those passages, using a stricter category definition and requiring an exact evidence quote.
+So the broader method does not simply search for the word `TaRL`, and it does not ask an LLM to guess from the whole document. It first narrows the plan to the most relevant chunk-sized passages, then asks the model whether those passages really describe teaching by assessed learning level rather than generic remediation.
