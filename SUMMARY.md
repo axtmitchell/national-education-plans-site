@@ -12,5 +12,6 @@
   - [RAG method](rag-method.md)
   - [RAG validation](rag-validation.md)
   - [Smart-buy definitions and prompts](smart-buy-definitions.md)
+  - [Smart-buy example quotes](smart-buy-example-quotes.md)
   - [Worked example: targeted instruction](targeted-instruction-worked-example.md)
   - [Worked example: targeted instruction (short)](targeted-instruction-worked-example-short.md)
