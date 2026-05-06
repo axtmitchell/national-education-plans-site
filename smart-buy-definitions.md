@@ -10,6 +10,19 @@ If you only want the short version: we used a two-step screen. We first looked f
 2. **Broad retrieval.** A broader English and French retrieval step combined weighted lexical cues with semantic query phrases.
 3. **Final review.** A model reviewed the retrieved chunks and labeled a category TRUE only when the evidence clearly matched the definition.
 
+## Plain-English Short Definitions
+
+If you just want the rough meaning of each category, this is what the final screen was looking for:
+
+- `Information for schooling decisions`: families or learners are given decision-relevant information on school quality or on the costs and benefits of schooling.
+- `Structured pedagogy`: a package combining teacher-facing classroom guidance, such as lesson plans or teacher guides, with ongoing support such as coaching, mentoring, or training.
+- `Targeted instruction`: teaching or grouping students by their current learning level rather than by grade alone.
+- `Parent-directed early stimulation`: parenting or caregiver support for very young children that clearly focuses on stimulation and child development.
+- `Quality pre-primary education`: improving the quality of preschool or kindergarten education for children ages 3 to 5, not just expanding access.
+- `Reducing travel barriers`: reducing the distance, time, or cost of getting children to school, for example through transport support or school-proximity measures.
+- `Merit-based scholarships`: scholarships or financial incentives that are clearly tied to merit or performance.
+- `School-based deworming`: school-based mass deworming in places where worm burden is a relevant concern.
+
 ## Click By Category
 
 <details>

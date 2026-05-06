@@ -8,11 +8,27 @@ We then searched these plans for mentions of the eight specific GEEAP smart buys
 
 > **Revised methods draft for review**
 >
-> We used an AI-assisted screening method to identify substantive mentions of each smart buy, not just exact phrases. The system first pulled passages that looked potentially relevant, including cases where plans described the same intervention in different words, and then checked whether the surrounding context actually matched a short intervention-specific definition.
+> We used an AI-assisted screening method to identify substantive mentions of each smart buy, not just exact phrases. The system first pulled passages that looked potentially relevant, including cases where plans described the same intervention in other terms, and then checked whether the surrounding context actually matched a short intervention-specific definition.
 >
-> We revised those screening rules after reviewing early false positives, especially in categories that could easily be confused with nearby ideas. In our English validation sample, `49` of `53` scored positives were judged to be real hits (`92.5%`). Across that sample and a later, tougher French spot-check focused on the categories that seemed easiest to overstate, `61` of `69` scored positives were judged real hits (`88.4%`).
+> We revised those rules after reviewing early false positives, especially where a smart buy could easily blur into a nearby idea, such as preschool access rather than preschool quality, or generic teacher training rather than structured pedagogy. Across our manual checks, we reviewed a sample of cases the method had flagged as smart-buy mentions. Of the `69` cases where we made a clear yes/no judgment, `61` were correct (`88.4%`).
 >
 > This should therefore not be read as a guarantee that we found every mention. It should be read as evidence that when the method says a plan mentions one of these interventions, it is usually identifying a real one.
+
+<details>
+<summary><strong>What each smart buy meant in practice</strong></summary>
+
+These were concept-based categories rather than exact-phrase searches. In plain English:
+
+- `Structured pedagogy` meant a package combining teacher-facing classroom guidance, such as lesson plans or teacher guides, with ongoing support such as training, mentoring, or coaching.
+- `Targeted instruction` meant teaching or grouping students by their current learning level rather than by grade alone.
+- `Information` meant giving families or learners decision-relevant information on school quality or on the costs and benefits of schooling.
+- `Early child stimulation` meant parenting or caregiver support for very young children that clearly focused on stimulation and child development.
+- `Preschool` meant a clear mention of improving the quality of preschool or kindergarten education for children ages 3 to 5, not just expanding access.
+- `Reducing travel time` meant transport or school-proximity measures that reduce the distance, time, or cost of getting to school.
+- `Merit scholarships` meant scholarships or financial incentives that were clearly tied to merit or performance.
+- `Mass deworming` meant school-based deworming in places where worm burden is a relevant concern.
+
+</details>
 
 Only one document references the GEEAP smart buys project outright: Rwanda's `2024-28` Foundational Learning Strategy. But because our approach looks for the broader concepts behind each smart buy, we find that these ideas are consistently mentioned at least once in `40-80` percent of LMIC plans over the last 25 years. That suggests governments have often been using these kinds of cost-effective interventions, even when they are not using the GEEAP label. Targeted instruction and structured pedagogy, the two interventions most strongly associated with GEEAP in recent years, have both seen a steady increase in mentions over the last 20 years, but there is no obvious jump since the report itself.
 
