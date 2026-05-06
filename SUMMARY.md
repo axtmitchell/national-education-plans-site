@@ -4,6 +4,7 @@
 - [Introduction](introduction.md)
 - [Findings overview](findings.md)
   - [Government plans and smart buys](government-plans-smart-buys.md)
+  - [Blog draft: learning crisis and what works](developing-countries-learning-crisis-draft.md)
   - [French extension](french-extension.md)
   - [Structured pedagogy and TaRL figures](structured-pedagogy-and-tarl-figures.md)
 - [Methodology overview](methodology.md)
