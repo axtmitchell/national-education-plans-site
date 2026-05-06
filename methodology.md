@@ -13,6 +13,7 @@ Second, there is a broader retrieval-and-verification workflow. This broader lay
 - [RAG validation](rag-validation.md) reports the positive-side validation checks.
 - [Smart-buy definitions and prompts](smart-buy-definitions.md) records the exact terms, prompts, and category definitions.
 - [Worked example: targeted instruction](targeted-instruction-worked-example.md) walks through one category step by step.
+- [Worked example: targeted instruction (short)](targeted-instruction-worked-example-short.md) is a more compact blog-friendly version.
 
 ## Design Principle
 
