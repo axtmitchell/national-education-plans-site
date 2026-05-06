@@ -1,6 +1,6 @@
 # Smart Buy Example Quotes
 
-These are meant to be representative examples rather than the single neatest quotes. Codex 5.4 reviewed a sample of positive hits for each smart buy, sorted them into common patterns, and then chose examples that best reflected the kind of positive the method was usually finding while still being clear enough to show as a screenshot.
+These examples are supposed to be representative of the most common way each smart buy was mentioned. Codex 5.4 reviewed a sample of positive hits for each smart buy, sorted them into common patterns, and then chose examples that best reflected the kind of positive the method was usually finding while still being clear enough to show as a screenshot.
 
 ## Information
 
