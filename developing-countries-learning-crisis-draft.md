@@ -4,7 +4,15 @@ In a recent blog we outlined the extent to which two major donors, FCDO and the 
 
 Here we present a new analysis of more than 1,000 education-planning documents from more than 200 countries and territories spanning three decades, from 2000 to 2030. From the UNESCO Planipolis website we identified `820` national education plans. For this first analysis, we focus on the `528` plans that were available in English, covering `101` countries.
 
-We then searched these plans for mentions of the eight specific GEEAP smart buys: `structured pedagogy`, `targeted instruction`, `specific information about the costs, benefits, and quality of education`, `early child stimulation`, `preschool`, `reducing travel time`, `merit scholarships`, and `mass deworming`. We did this using a retrieval-augmented generation (RAG) approach: first applying a broad search to identify potentially relevant passages, and then using an LLM to review the surrounding context and determine whether the content genuinely corresponds to a GEEAP smart buy, even when different terminology is used.
+We then searched these plans for mentions of the eight specific GEEAP smart buys: `structured pedagogy`, `targeted instruction`, `specific information about the costs, benefits, and quality of education`, `early child stimulation`, `preschool`, `reducing travel time`, `merit scholarships`, and `mass deworming`.
+
+<div style="color: #b42318;">
+
+This was not a simple keyword search, but it was not a free-form AI read of whole documents either. We started with a deliberately broad AI screen designed to catch possible mentions even when plans used different language, and then tightened the method iteratively as we reviewed early results, to reduce false positives while still keeping most of the real ones.
+
+We also manually checked predicted positives at several stages. In our English validation sample, `49` of `53` scored positives were judged real hits (`92.5%`). So the claim is not that this method found every mention. The claim is that when it says a plan mentions one of these interventions, that is usually for a good reason.
+
+</div>
 
 Only one document references the GEEAP smart buys project outright: Rwanda's `2024-28` Foundational Learning Strategy. But because our approach looks for the broader concepts behind each smart buy, we find that these ideas are consistently mentioned at least once in `40-80` percent of LMIC plans over the last 25 years. That suggests governments have often been using these kinds of cost-effective interventions, even when they are not using the GEEAP label. Targeted instruction and structured pedagogy, the two interventions most strongly associated with GEEAP in recent years, have both seen a steady increase in mentions over the last 20 years, but there is no obvious jump since the report itself.
 
