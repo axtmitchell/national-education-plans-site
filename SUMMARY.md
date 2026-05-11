@@ -10,6 +10,7 @@
 - [Methodology overview](methodology.md)
   - [Strict and broad smart-buy mentions](strict-and-broad-smart-buy-mentions.md)
   - [RAG method](rag-method.md)
+  - [RAG for large text collections](rag-for-large-text-collections.md)
   - [RAG validation](rag-validation.md)
   - [Smart-buy definitions and prompts](smart-buy-definitions.md)
   - [Smart-buy example quotes](smart-buy-example-quotes.md)
