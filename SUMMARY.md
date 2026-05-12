@@ -10,6 +10,7 @@
 - [Methodology overview](methodology.md)
   - [How the topic model works](topic-model-process.md)
   - [Strict and broad smart-buy mentions](strict-and-broad-smart-buy-mentions.md)
+  - [Multilingual phrase rules](multilingual-strict-phrases.md)
   - [RAG method](rag-method.md)
   - [RAG for large text collections](rag-for-large-text-collections.md)
   - [RAG validation](rag-validation.md)

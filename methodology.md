@@ -10,6 +10,7 @@ Second, there is a broader retrieval-and-verification workflow. This broader lay
 
 - [How the topic model works](topic-model-process.md) explains the separate exploratory workflow used for the topic charts.
 - [Strict and broad smart-buy mentions](strict-and-broad-smart-buy-mentions.md) explains how the strict and broad figures fit together.
+- [Multilingual phrase rules](multilingual-strict-phrases.md) lists the exact English, French, and Spanish phrase rules used in the multilingual strict figures and the neglected-topic word-search screens.
 - [RAG method](rag-method.md) gives the plain-English explanation of the broader workflow.
 - [RAG for large text collections](rag-for-large-text-collections.md) is a shorter general explanation you can share with someone applying a similar approach to a different corpus.
 - [RAG validation](rag-validation.md) reports the positive-side validation checks.
