@@ -64,6 +64,3 @@ For `Basic skills`, the rule excludes nearby language that clearly points to old
 - French: `alphabetisation des adultes`, `education non formelle`, `formation des adultes`, `apprentissage tout au long de la vie`
 - Spanish: `alfabetizacion de adultos`, `educacion de adultos`, `educacion no formal`, `aprendizaje a lo largo de la vida`
 
-## Related Page
-
-For the broader mixed page that also includes the multilingual strict smart-buy phrase screen, see [Multilingual phrase rules](multilingual-strict-phrases.md).
