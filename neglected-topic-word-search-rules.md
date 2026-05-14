@@ -1,10 +1,4 @@
-# Neglected-Topic Word-Search Rules
-
-This page records the exact hard-coded phrase logic used for the current multilingual comparison graph:
-
-`government_neglected_topics_trends_lmic_multilingual_modern_fln_basic_skills_learning_crisis`
-
-This graph is a phrase screen rather than a broad retrieval system. It does not use semantic search, embeddings, or LLM review.
+# Figure 1 Word-Search Rules
 
 ## How To Read The Graph
 
@@ -19,14 +13,6 @@ The earlier broader `Foundational literacy / numeracy` line combined the first t
 `Foundational literacy / numeracy = Modern FLN vocabulary + Basic skills`
 
 That is why the older broad FLN line can look very similar to the `Basic skills` line in years when modern FLN terminology is still rare.
-
-## What This Page Is Showing
-
-- Text is lowercased before matching.
-- Accents are stripped before matching, so `éducation` is matched as `education`.
-- Minor punctuation, spacing, and hyphen variants are allowed in code. The lists below show the readable phrase forms.
-- The rules below are all hard-coded phrase rules.
-- For `Modern FLN vocabulary` and `Basic skills`, the title and body text are checked together because the schooling stage is sometimes signaled in the title.
 
 ## Exact Rules By Series
 
@@ -83,15 +69,3 @@ The rule excludes nearby language that clearly points to older or broader popula
 - French: `alphabetisation des adultes`, `education non formelle`, `formation des adultes`, `apprentissage tout au long de la vie`
 - Spanish: `alfabetizacion de adultos`, `educacion de adultos`, `educacion no formal`, `aprendizaje a lo largo de la vida`
 
-## Short Version
-
-If you only want the quick interpretation:
-
-- `Modern FLN vocabulary` is the newer explicit jargon.
-- `Basic skills` is the older wording for early reading, writing, and math.
-- `Learning crisis` is its own direct phrase search.
-- No part of this graph uses semantic search or AI judgment.
-
-## Related Page
-
-For the broader mixed page that also includes the multilingual strict smart-buy phrase screen, see [Multilingual phrase rules](multilingual-strict-phrases.md).
