@@ -8,6 +8,7 @@
   - [French extension](french-extension.md)
   - [Structured pedagogy and TaRL figures](structured-pedagogy-and-tarl-figures.md)
 - [Methodology overview](methodology.md)
+  - [How the topic model works](topic-model-process.md)
   - [Strict and broad smart-buy mentions](strict-and-broad-smart-buy-mentions.md)
   - [Neglected-topic word-search rules](neglected-topic-word-search-rules.md)
   - [Multilingual phrase rules](multilingual-strict-phrases.md)

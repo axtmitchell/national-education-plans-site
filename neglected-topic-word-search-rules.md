@@ -25,6 +25,7 @@ The current graph has three series:
 The earlier broader `Foundational literacy / numeracy` line combined the first two. That is why the earlier broad FLN line can look very similar to the `Basic skills` line in periods when modern FLN terminology is still rare.
 
 ## Exact Rules By Series
+- For `Foundational literacy / numeracy`, the title and body text are checked together because the schooling stage is sometimes signaled in the title.
 
 ### Learning Crisis
 
