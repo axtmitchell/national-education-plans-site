@@ -6,30 +6,33 @@ This page records the exact hard-coded phrase logic used for the current multili
 
 This graph is a phrase screen rather than a broad retrieval system. It does not use semantic search, embeddings, or LLM review.
 
-## Matching Notes
+## How To Read The Graph
+
+The current graph has three series:
+
+- `Modern FLN vocabulary`: direct modern terms such as `foundational literacy`, `foundational numeracy`, and `fln`
+- `Basic skills`: older wording for early reading, writing, and math skills
+- `Learning crisis`: direct phrases such as `learning crisis` and `learning poverty`
+
+The earlier broader `Foundational literacy / numeracy` line combined the first two. In other words:
+
+`Foundational literacy / numeracy = Modern FLN vocabulary + Basic skills`
+
+That is why the older broad FLN line can look very similar to the `Basic skills` line in years when modern FLN terminology is still rare.
+
+## What This Page Is Showing
 
 - Text is lowercased before matching.
 - Accents are stripped before matching, so `éducation` is matched as `education`.
 - Minor punctuation, spacing, and hyphen variants are allowed in code. The lists below show the readable phrase forms.
+- The rules below are all hard-coded phrase rules.
 - For `Modern FLN vocabulary` and `Basic skills`, the title and body text are checked together because the schooling stage is sometimes signaled in the title.
-- `Basic skills` uses the same early-childhood / primary-stage guards and adult / non-formal exclusions across English, French, and Spanish.
-
-## Current Graph
-
-The current graph has three series:
-
-- `Modern FLN vocabulary`
-- `Basic skills`
-- `Learning crisis`
-
-The earlier broader `Foundational literacy / numeracy` line combined the first two. That is why the earlier broad FLN line can look very similar to the `Basic skills` line in periods when modern FLN terminology is still rare.
 
 ## Exact Rules By Series
-- For `Foundational literacy / numeracy`, the title and body text are checked together because the schooling stage is sometimes signaled in the title.
 
 ### Learning Crisis
 
-The rule fires on any of these direct phrases:
+This line uses direct phrase hits only.
 
 - English: `global learning crisis`, `learning crisis`, `learning poverty`
 - French: `crise des apprentissages`, `crise de l apprentissage`, `crise des apprentissage`, `pauvrete des apprentissages`, `pauvrete de l apprentissage`
@@ -37,40 +40,57 @@ The rule fires on any of these direct phrases:
 
 ### Modern FLN Vocabulary
 
-This series counts only direct modern FLN terms. In the current graph, these are English modern FLN phrases:
+This line counts only direct modern FLN terms.
 
 - English: `foundational literacy`, `foundational numeracy`, `foundational literacy and numeracy`, `fln`
 
 ### Basic Skills
 
-This series counts older basic-skills phrasing rather than direct modern FLN vocabulary.
+This line is meant to capture older wording for the same general idea.
 
-More precise literacy-numeracy phrases count only when they appear in a nearby early-childhood, pre-primary, primary, or early-grade context:
+A document counts on the `Basic skills` line only if all of these are true:
+
+1. It contains one of the phrase families below.
+2. That phrase appears near language pointing to early-childhood, pre-primary, primary, or early-grade learning.
+3. It is not clearly about adults, non-formal learning, tertiary education, or other older-learner contexts.
+
+#### Step 1: Phrase Families
+
+These phrase families can trigger the `Basic skills` line:
 
 - English: `literacy and numeracy`, `basic literacy and numeracy`, `reading writing arithmetic`, `reading writing numeracy`, `reading writing mathematics`, `reading writing math`
 - French: `litteratie`, `numeratie`, `lecture ecriture calcul`, `lire ecrire compter`
 - Spanish: `lectoescritura`, `lectura escritura calculo`
 
-Broader basic-learning phrases also require a nearby early-childhood, pre-primary, primary, or early-grade context, plus nearby literacy-numeracy wording:
+These broader phrase families can also count, but only if they appear near both young-learner language and nearby literacy / numeracy wording:
 
 - French: `apprentissages fondamentaux`
 - Spanish: `aprendizajes fundamentales`
 
-### Shared Age / Stage Phrases
+#### Step 2: Young-Learner Or Primary-Stage Context
 
-For `Basic skills`, the code checks for nearby age or schooling-stage phrases such as:
+The code then looks for nearby age or schooling-stage language such as:
 
 - English: `early grade`, `early grades`, `early years`, `early primary`, `primary class`, `primary classes`, `primary stage`, `elementary`, `pre-primary`, `preschool`, `kindergarten`, `early childhood`, `lower primary`, `eced`, `grade 1`, `grade 2`, `grade 3`, `first years of school`
 - French: `education de base`, `enseignement primaire`, `ecole primaire`, `primaire`, `elementaire`, `preprimaire`, `prescolaire`, `preelementaire`, `petite enfance`, `premier cycle`, `premieres annees`
 - Spanish: `nivel primario`, `educacion primaria`, `primaria`, `preescolar`, `preprimaria`, `educacion inicial`, `primera infancia`, `primeros grados`, `primer ciclo`
 
-### Shared Exclusions
+#### Step 3: Exclusions
 
-For `Basic skills`, the rule excludes nearby language that clearly points to older or broader populations rather than young learners:
+The rule excludes nearby language that clearly points to older or broader populations rather than young learners:
 
 - English: `adult literacy`, `adult education`, `adult learners`, `lifelong learning`, `non-formal education`, `nfe programme`, `prevocational`, `higher education`, `tertiary`
 - French: `alphabetisation des adultes`, `education non formelle`, `formation des adultes`, `apprentissage tout au long de la vie`
 - Spanish: `alfabetizacion de adultos`, `educacion de adultos`, `educacion no formal`, `aprendizaje a lo largo de la vida`
+
+## Short Version
+
+If you only want the quick interpretation:
+
+- `Modern FLN vocabulary` is the newer explicit jargon.
+- `Basic skills` is the older wording for early reading, writing, and math.
+- `Learning crisis` is its own direct phrase search.
+- No part of this graph uses semantic search or AI judgment.
 
 ## Related Page
 
