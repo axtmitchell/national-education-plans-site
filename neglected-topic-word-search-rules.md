@@ -53,6 +53,18 @@ These broader phrase families can also count, but only if they appear near both 
 - French: `apprentissages fondamentaux`
 - Spanish: `aprendizajes fundamentales`
 
+These two phrases are treated differently because they are more vague than the phrase families above. On their own, they do not automatically mean early reading, writing, or math. They could just mean something like `core learning` or `fundamental learning` in a broader sense.
+
+So the code uses them only as a fallback rule. They count only when the surrounding text also makes clear that the document is talking about:
+
+- young learners or primary-stage schooling
+- reading, writing, literacy, numeracy, calculation, or math
+
+Example:
+
+- This would count: `apprentissages fondamentaux ... ecriture, lecture et calcul ... premieres annees du primaire`
+- This would not count on this rule alone: `aprendizajes fundamentales para la vida`
+
 #### Step 2: Young-Learner Or Primary-Stage Context
 
 The code then looks for nearby age or schooling-stage language such as:
@@ -68,4 +80,3 @@ The rule excludes nearby language that clearly points to older or broader popula
 - English: `adult literacy`, `adult education`, `adult learners`, `lifelong learning`, `non-formal education`, `nfe programme`, `prevocational`, `higher education`, `tertiary`
 - French: `alphabetisation des adultes`, `education non formelle`, `formation des adultes`, `apprentissage tout au long de la vie`
 - Spanish: `alfabetizacion de adultos`, `educacion de adultos`, `educacion no formal`, `aprendizaje a lo largo de la vida`
-
