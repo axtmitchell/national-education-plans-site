@@ -1,11 +1,5 @@
 # Neglected-Topic Word-Search Rules
 
-This page records the exact hard-coded phrase logic used for the current multilingual comparison graph:
-
-`government_neglected_topics_trends_lmic_multilingual_modern_fln_basic_skills_learning_crisis`
-
-This graph is a phrase screen rather than a broad retrieval system. It does not use semantic search, embeddings, or LLM review.
-
 ## Matching Notes
 
 - Text is lowercased before matching.
@@ -21,8 +15,6 @@ The current graph has three series:
 - `Modern FLN vocabulary`
 - `Basic skills`
 - `Learning crisis`
-
-The earlier broader `Foundational literacy / numeracy` line combined the first two. That is why the earlier broad FLN line can look very similar to the `Basic skills` line in periods when modern FLN terminology is still rare.
 
 ## Exact Rules By Series
 - For `Foundational literacy / numeracy`, the title and body text are checked together because the schooling stage is sometimes signaled in the title.
