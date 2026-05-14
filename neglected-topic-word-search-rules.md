@@ -1,4 +1,4 @@
-# Neglected-Topic Word-Search Rules
+# Figure 1 Word-Search Rules
 
 ## Matching Notes
 
