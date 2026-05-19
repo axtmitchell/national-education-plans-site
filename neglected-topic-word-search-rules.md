@@ -1,29 +1,28 @@
 # Figure 1 Word-Search Rules
 
 Before matching, text is lowercased, accents are stripped, and minor punctuation variants are ignored.
+`n` is the number of LMIC plans in this corpus containing that phrase or rule. Counts overlap.
 
 ## Learning Crisis
 
-- English: `global learning crisis`, `learning crisis`, `learning poverty`
-- French: `crise des apprentissages`, `crise de l apprentissage`, `crise des apprentissage`, `pauvrete des apprentissages`, `pauvrete de l apprentissage`
-- Spanish: `crisis de aprendizaje`, `crisis del aprendizaje`, `pobreza de aprendizaje`
+- English: `global learning crisis` (`n=2`), `learning crisis` (`n=12`), `learning poverty` (`n=8`)
+- French: `crise des apprentissages` (`n=1`), `crise de l apprentissage` (`n=0`), `crise des apprentissage` (`n=1`), `pauvrete des apprentissages` (`n=0`), `pauvrete de l apprentissage` (`n=0`)
+- Spanish: `crisis de aprendizaje` (`n=0`), `crisis del aprendizaje` (`n=0`), `pobreza de aprendizaje` (`n=0`)
 
-## FLN
-
+## Foundational Learning
 
 ### English
 
-- `foundational literacy`
-- `foundational numeracy`
-- `foundational literacy and numeracy`
-- `fln`
+- `foundational literacy` (`n=16`)
+- `foundational numeracy` (`n=0`)
+- `fln` (`n=3`)
 
 ### Spanish
 
-- `habilidades fundacionales`
-- `lectoescritura` when it appears together with nearby math wording such as `matemáticas`, `matemático`, or `matemática`
+- `habilidades fundacionales` (`n=0`)
+- `lectoescritura` with nearby `matematicas`, `matematico`, or `matematica` (`n=3`)
 
 ### French
 
-- `littératie` together with `numératie`
-- `compétences fondamentales` when the phrase itself also names reading and math, for example `lecture` with `calcul` or `mathématiques`
+- `litteratie` together with `numeratie` (`n=3`)
+- `competences fondamentales` with `lecture` and `calcul` or `mathematiques` (`n=3`)
