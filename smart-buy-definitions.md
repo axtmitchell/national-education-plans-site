@@ -1,18 +1,13 @@
 # How We Defined Each Smart Buy
 
-This note is meant to be a click-through methods explainer rather than a long technical appendix in the middle of a post.
-
-If you only want the short version: we used a two-step screen. We first looked for narrow, explicit references to each smart buy, then ran a broader retrieval-and-review pass to catch looser mentions. Open any category below to see what counted, what usually did not count, and the exact technical logic underneath.
-
 ## Method At A Glance
 
-1. **Strict screen.** A narrow lower-bound phrase screen looked for direct references to each intervention. This screen is currently English-only.
-2. **Broad retrieval.** A broader English and French retrieval step combined weighted lexical cues with semantic query phrases.
-3. **Final review.** A model reviewed the retrieved chunks and labeled a category TRUE only when the evidence clearly matched the definition.
+1. **Broad retrieval.** A broader retrieval step combined weighted lexical cues with semantic query phrases.
+2. **LLM review.** A model reviewed the retrieved chunks and labeled a category TRUE only when the evidence clearly matched the definition.
 
-## Plain-English Short Definitions
+## Smart Buy Definitions
 
-If you just want the rough meaning of each category, this is what the final screen was looking for:
+We defined the smart buys to the LLM below:
 
 - `Information for schooling decisions`: families or learners are given decision-relevant information on school quality or on the costs and benefits of schooling.
 - `Structured pedagogy`: a package combining teacher-facing classroom guidance, such as lesson plans or teacher guides, with ongoing support such as coaching, mentoring, or training.
