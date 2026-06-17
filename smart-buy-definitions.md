@@ -1,4 +1,4 @@
-# How We Defined Each Smart Buy
+# How We Defined Each Smart Buy (note to do: get rid of strict mentions, include french and spanish, include your validation attempt in here, just very simply, we reviewed a sample of x/y of the positive hits and agreed with the model xx% of the time). 
 
 ## Method At A Glance
 
