@@ -1,8 +1,8 @@
 # Worked Example: Targeted Instruction
 
-This is a short worked example of how the broader method looked for targeted instruction: teaching or grouping students by their current learning level rather than by grade alone.
+This is a short worked example of how the retrieval-augmented generation (RAG) method looked for targeted instruction. We defined targeted instruction as teaching or grouping students by their current learning level rather than by grade alone.
 
-This page is meant as an overview, not a full technical appendix. For the exact term lists and prompts, see [How We Defined Each Smart Buy](smart-buy-definitions.md).
+This page is meant as an overview. For the exact term lists and prompts, see [How We Defined Each Smart Buy](smart-buy-definitions.md).
 
 ## 1. Retrieve promising chunks of text
 
@@ -32,29 +32,22 @@ The semantic step uses embeddings: the model turns both chunks and query phrases
 
 ## 2. Keep only the top-ranked chunks
 
-There is no single semantic-score cutoff such as “everything above 0.7 passes.”
-
-Instead, the method keeps:
+The method keeps:
 
 - the top lexical hits
 - the top semantic hits
 - the union of those hits, reranked using the combined retrieval score
 - neighboring chunks for context
 
-Only a small number of the highest-ranked chunks are then sent to the LLM.
+The highest-ranked chunks are then sent to the LLM.
 
 ## 3. Ask the LLM to make the judgment
 
-The LLM does not read the whole plan from scratch. It only reads the retrieved chunks and decides whether they really describe targeted instruction by learning level.
+The LLM reads the retrieved chunks and decides whether they really describe targeted instruction by learning level.
 
-The English rule is:
+The rule is:
 
 - count `TRUE` only when the text clearly describes targeted instruction by learning level rather than by grade alone
-
-The French rule is slightly stricter:
-
-- count `TRUE` only when teaching or student grouping is explicitly organized by assessed learning level
-- do **not** count generic remediation, catch-up support, screening, or diagnostic assessment on their own
 
 ## 4. Verification step
 
@@ -63,8 +56,5 @@ A cheaper model does the first pass, and a stronger model re-checks:
 - all positives
 - negatives with low confidence
 
-The model must give a short verbatim quote from the retrieved text as evidence. If the quote is not actually present in the retrieved chunks, the hit is rejected.
+The model must give a short verbatim quote from the retrieved text as evidence. Which is reviewed by the authors.
 
-## Plain-English takeaway
-
-So the broader method does not simply search for the word `TaRL`, and it does not ask an LLM to guess from the whole document. It first narrows the plan to the most relevant chunk-sized passages, then asks the model whether those passages really describe teaching by assessed learning level rather than generic remediation.
