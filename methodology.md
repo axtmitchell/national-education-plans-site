@@ -1,41 +1,6 @@
 # Methodology
 
-This page explains the method behind the smart-buy mention figures in the blog, especially the trilingual income-group chart below.
-
-![Share of plans mentioning each smart buy, by income group](assets/figures/bb_mention_pct_by_income_rag_english_french_spanish_combined.png)
-
-## What We Analysed
-
-We scraped UNESCO's Planipolis website and identified `820` education-planning documents. The analysis used the `743` documents that were available in English, French, or Spanish and had usable extracted text:
-
-- `528` English documents
-- `155` French documents
-- `60` Spanish documents
-- `134` countries
-- `561` country-year observations
-
-This is not a pure sample of broad national education sector plans. Of the `743` analysed documents, `179` were broad national sector plans and `564` were more specific strategies or action plans on topics such as higher education, emergencies, teacher development, early childhood education, or other sub-sectors.
-
-## What We Counted
-
-For each document, we searched for substantive mentions of the eight GEEAP smart buys:
-
-- structured pedagogy
-- targeted instruction
-- information on the costs, benefits, or quality of education
-- parent-directed early childhood stimulation
-- quality pre-primary education
-- reducing travel time or cost to school
-- merit scholarships or performance-linked incentives
-- school-based mass deworming
-
-A positive label means the document appears to mention the intervention idea at least once. It does not mean the document cites GEEAP, proves implementation, or shows that the intervention was funded at scale.
-
-## Why We Used RAG
-
-Simple keyword searches were too brittle for this task. They missed plans that described the same idea in different words, and they also produced false positives when broad phrases appeared in unrelated contexts.
-
-We therefore used a retrieval-augmented generation workflow. The aim was not to ask an LLM to read whole documents freely. Instead, the pipeline first found candidate passages, then asked the model to judge whether those passages really matched the smart-buy definition.
+Overview: The pipeline first found candidate passages, then asked the model to judge whether those passages really matched the smart-buy definition.
 
 ## How The RAG Pipeline Worked
 
