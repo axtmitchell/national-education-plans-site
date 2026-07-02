@@ -24,10 +24,6 @@ The validation checks were positive-side checks: we reviewed cases that the meth
 
 In the validation sample, `61` of `69` (88%) scored positives were judged correct.
 
-## Exact Retrieval And Prompt Details
-
-The section below records the core machine-readable settings used for the broad RAG screen. The production code remains the source of truth, but these definitions, retrieval cues, semantic queries, and prompt rules are sufficient to reproduce the retrieval-and-review logic.
-
 ### Shared Retrieval Settings
 
 - Chunk size: `2,200` characters
