@@ -790,19 +790,9 @@ In the rationale, briefly state which core components are present or missing.
 
 ## Reproduction Files
 
-Use these three scripts as the clean replication path:
-
 1. `analysis/replication_01_clean_data.py`
-   - prepares the English, French, and Spanish input files under `output/replication/clean/`
+   - prepares the input files under `output/replication/clean/`
 2. `analysis/replication_02_run_rag.py`
-   - runs the RAG classifier for each language and writes labelled outputs under `output/replication/rag/`
 3. `analysis/replication_03_make_graph.py`
-   - combines the labelled English, French, and Spanish outputs and writes the final income-group graph
 
 The second script uses the OpenAI API. By default it prints the commands it would run; pass `--yes-run-api` to actually call the API. The third script can also use the already completed published RAG outputs with `--source published`, which is its default.
-
-More detailed method notes:
-
-- [RAG method](rag-method.md)
-- [RAG validation](rag-validation.md)
-- [Smart-buy definitions and prompts](smart-buy-definitions.md)
