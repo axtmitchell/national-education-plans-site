@@ -796,25 +796,16 @@ In the rationale, briefly state which core components are present or missing.
 
 ## Reproduction Files
 
-Main classifier:
+Use these three scripts as the clean replication path:
 
-- `code/14_llm_rag_classify.py`
+1. `analysis/replication_01_clean_data.py`
+   - prepares the English, French, and Spanish input files under `output/replication/clean/`
+2. `analysis/replication_02_run_rag.py`
+   - runs the RAG classifier for each language and writes labelled outputs under `output/replication/rag/`
+3. `analysis/replication_03_make_graph.py`
+   - combines the labelled English, French, and Spanish outputs and writes the final income-group graph
 
-Language-specific configurations:
-
-- `code/best_buy_configs/french_rag_v1.py`
-- `code/best_buy_configs/spanish_rag_v2.py`
-
-Completed RAG outputs:
-
-- `output/nep_counted_llm_rag_full.dta`
-- `output/nep_counted_llm_rag_french_full_v1.dta`
-- `output/nep_counted_llm_rag_spanish_full_v2.dta`
-
-Figure code:
-
-- `code/20_blog_figure_refresh.py`
-- `code/27_rag_french_combined_graphs.py`
+The second script uses the OpenAI API. By default it prints the commands it would run; pass `--yes-run-api` to actually call the API. The third script can also use the already completed published RAG outputs with `--source published`, which is its default.
 
 More detailed method notes:
 
