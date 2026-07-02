@@ -1,18 +1,13 @@
-# How We Defined Each Smart Buy
-
-This note is meant to be a click-through methods explainer rather than a long technical appendix in the middle of a post.
-
-If you only want the short version: we used a two-step screen. We first looked for narrow, explicit references to each smart buy, then ran a broader retrieval-and-review pass to catch looser mentions. Open any category below to see what counted, what usually did not count, and the exact technical logic underneath.
+# How We Defined Each Smart Buy (note to do: get rid of strict mentions, include french and spanish, include your validation attempt in here, just very simply, we reviewed a sample of x/y of the positive hits and agreed with the model xx% of the time). 
 
 ## Method At A Glance
 
-1. **Strict screen.** A narrow lower-bound phrase screen looked for direct references to each intervention. This screen is currently English-only.
-2. **Broad retrieval.** A broader English and French retrieval step combined weighted lexical cues with semantic query phrases.
-3. **Final review.** A model reviewed the retrieved chunks and labeled a category TRUE only when the evidence clearly matched the definition.
+1. **Broad retrieval.** A broader retrieval step combined weighted lexical cues with semantic query phrases.
+2. **LLM review.** A model reviewed the retrieved chunks and labeled a category TRUE only when the evidence clearly matched the definition.
 
-## Plain-English Short Definitions
+## Smart Buy Definitions
 
-If you just want the rough meaning of each category, this is what the final screen was looking for:
+We defined the smart buys to the LLM below:
 
 - `Information for schooling decisions`: families or learners are given decision-relevant information on school quality or on the costs and benefits of schooling.
 - `Structured pedagogy`: a package combining teacher-facing classroom guidance, such as lesson plans or teacher guides, with ongoing support such as coaching, mentoring, or training.
@@ -27,12 +22,6 @@ If you just want the rough meaning of each category, this is what the final scre
 
 <details>
 <summary><strong>Information for schooling decisions</strong> - Information on benefits, costs, or school quality that could shape choices</summary>
-
-**What we counted.** We counted interventions that give families, parents, or learners decision-relevant information on school quality or on the costs and benefits of schooling.
-
-**What we usually did not count.** We usually did not count generic awareness campaigns, school updates, or internal cost and budget information that did not clearly help households make schooling decisions.
-
-**How this category was screened.** We first used a narrow phrase screen to catch direct mentions, then a broader retrieval step in English and French, followed by a final model review of the retrieved text.
 
 <details>
 <summary>Show exact strict-screen terms</summary>
@@ -170,12 +159,6 @@ In the rationale, briefly state which core components are present or missing.
 <details>
 <summary><strong>Structured pedagogy</strong> - Classroom guidance plus ongoing teacher support</summary>
 
-**What we counted.** We counted structured pedagogy packages that combine classroom guidance or materials with ongoing teacher support, such as lesson plans or teacher guides plus coaching, mentoring, or training.
-
-**What we usually did not count.** We usually did not count generic teacher training, standalone materials, or broad curriculum reform on their own.
-
-**How this category was screened.** We first used a narrow phrase screen to catch direct mentions, then a broader retrieval step in English and French, followed by a final model review of the retrieved text.
-
 <details>
 <summary>Show exact strict-screen terms</summary>
 
@@ -307,12 +290,6 @@ In the rationale, briefly state which core components are present or missing.
 </details>
 <details>
 <summary><strong>Targeted instruction</strong> - Teaching matched to a student's current learning level</summary>
-
-**What we counted.** We counted teaching that is explicitly organized around students' current learning levels, including TaRL-style grouping or instruction after assessment.
-
-**What we usually did not count.** We usually did not count generic remediation or catch-up support unless the plan clearly described grouping or teaching by assessed learning level.
-
-**How this category was screened.** We first used a narrow phrase screen to catch direct mentions, then a broader retrieval step in English and French, followed by a final model review of the retrieved text.
 
 <details>
 <summary>Show exact strict-screen terms</summary>
@@ -447,12 +424,6 @@ In the rationale, briefly state which core components are present or missing.
 </details>
 <details>
 <summary><strong>Parent-directed early stimulation</strong> - Parent or caregiver support focused on early child development</summary>
-
-**What we counted.** We counted parent-directed early childhood stimulation programs for very young children, including parenting or caregiver support that clearly focused on stimulation and child development.
-
-**What we usually did not count.** We usually did not count generic parenting support or home visits unless the stimulation or child-development component was clear.
-
-**How this category was screened.** We first used a narrow phrase screen to catch direct mentions, then a broader retrieval step in English and French, followed by a final model review of the retrieved text.
 
 <details>
 <summary>Show exact strict-screen terms</summary>
@@ -594,12 +565,6 @@ In the rationale, briefly state which core components are present or missing.
 <details>
 <summary><strong>Quality pre-primary education</strong> - Pre-primary or preschool quality improvement for ages 3 to 5</summary>
 
-**What we counted.** We counted quality-focused pre-primary interventions for ages 3 to 5, including preschool or kindergarten quality improvement.
-
-**What we usually did not count.** We usually did not count generic pre-primary expansion or enrolment language unless the quality-improvement component was clear.
-
-**How this category was screened.** We first used a narrow phrase screen to catch direct mentions, then a broader retrieval step in English and French, followed by a final model review of the retrieved text.
-
 <details>
 <summary>Show exact strict-screen terms</summary>
 
@@ -736,12 +701,6 @@ In the rationale, briefly state which core components are present or missing.
 </details>
 <details>
 <summary><strong>Reducing travel barriers</strong> - Lowering distance, time, or transport barriers to schooling</summary>
-
-**What we counted.** We counted interventions that reduce travel distance, time, or cost barriers to getting children to school, such as transport support or school-proximity measures.
-
-**What we usually did not count.** We usually did not count generic transport references unless they clearly reduced access barriers to schooling.
-
-**How this category was screened.** We first used a narrow phrase screen to catch direct mentions, then a broader retrieval step in English and French, followed by a final model review of the retrieved text.
 
 <details>
 <summary>Show exact strict-screen terms</summary>
@@ -883,12 +842,6 @@ In the rationale, briefly state which core components are present or missing.
 <details>
 <summary><strong>Merit-based scholarships</strong> - Scholarships or financial incentives tied to performance</summary>
 
-**What we counted.** We counted scholarships or financial incentives that were clearly tied to merit or performance.
-
-**What we usually did not count.** We usually did not count generic mentions of merit, awards, or selection unless they were clearly linked to scholarship or financial support.
-
-**How this category was screened.** We first used a narrow phrase screen to catch direct mentions, then a broader retrieval step in English and French, followed by a final model review of the retrieved text.
-
 <details>
 <summary>Show exact strict-screen terms</summary>
 
@@ -1021,12 +974,6 @@ In the rationale, briefly state which core components are present or missing.
 </details>
 <details>
 <summary><strong>School-based deworming</strong> - School delivery of deworming treatment</summary>
-
-**What we counted.** We counted school-based mass deworming for children in settings where worm burden is a relevant concern.
-
-**What we usually did not count.** We usually did not count general school health or nutrition measures unless they clearly referred to deworming.
-
-**How this category was screened.** We first used a narrow phrase screen to catch direct mentions, then a broader retrieval step in English and French, followed by a final model review of the retrieved text.
 
 <details>
 <summary>Show exact strict-screen terms</summary>
