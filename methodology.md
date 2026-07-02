@@ -1,14 +1,12 @@
 # Methodology
 
-Overview: The pipeline first found candidate passages, then asked the model to judge whether those passages really matched the smart-buy definition.
-
-## How The RAG Pipeline Worked
+## Overview
 
 Each document was split into overlapping chunks of about `2,200` characters, with `250` characters of overlap.
 
 For each smart buy, candidate chunks were retrieved in two ways:
 
-- **Lexical retrieval:** weighted phrase searches looked for intervention-specific cues and synonyms. Stronger cues counted more than weaker cues.
+- **Lexical retrieval:** weighted phrase searches looked for intervention-specific cues and synonyms. Stronger cues counted more than weaker cues. See "Lexical Cues And Semantic Queries" below
 - **Semantic retrieval:** embeddings from `text-embedding-3-small` were used to find chunks that were close in meaning to short descriptions of the intervention, even if they did not use the exact search terms.
 
 The pipeline kept the top lexical and semantic hits, added nearby chunks for context.
