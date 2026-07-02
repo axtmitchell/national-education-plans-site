@@ -24,7 +24,7 @@ The validation checks were positive-side checks: we reviewed cases that the meth
 
 In the validation sample, `61` of `69` (88%) scored positives were judged correct.
 
-### Shared Retrieval Settings
+## Shared Retrieval Settings
 
 - Chunk size: `2,200` characters
 - Chunk overlap: `250` characters
