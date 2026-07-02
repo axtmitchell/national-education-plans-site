@@ -1,26 +1,115 @@
-# Methodology Overview
+# Methodology
 
-The site uses two layers of measurement.
+This page explains the method behind the smart-buy mention figures in the blog, especially the trilingual income-group chart below.
 
-First, there is a conservative strict phrase search. This is the lower-bound screen that looks for relatively direct mentions of the smart buys.
+![Share of plans mentioning each smart buy, by income group](assets/figures/bb_mention_pct_by_income_rag_english_french_spanish_combined.png)
 
-Second, there is a broader retrieval-and-verification workflow. This broader layer combines weighted lexical search terms, embedding-based semantic retrieval, and final LLM review of the retrieved text.
+## What We Analysed
 
-## What To Read Next
+We scraped UNESCO's Planipolis website and identified `820` education-planning documents. The analysis used the `743` documents that were available in English, French, or Spanish and had usable extracted text:
 
-- [How the topic model works](topic-model-process.md) explains the separate exploratory workflow used for the topic charts.
-- [Strict and broad smart-buy mentions](strict-and-broad-smart-buy-mentions.md) explains how the strict and broad figures fit together.
-- [Neglected-topic word-search rules](neglected-topic-word-search-rules.md) records the exact hard-coded English, French, and Spanish phrase rules used in the current multilingual `Modern FLN vocabulary / Basic skills / Learning crisis` comparison graph.
-- [Multilingual phrase rules](multilingual-strict-phrases.md) lists the exact English, French, and Spanish phrase rules used in the multilingual strict figures and the neglected-topic word-search screens.
-- [RAG method](rag-method.md) gives the plain-English explanation of the broader workflow.
-- [RAG for large text collections](rag-for-large-text-collections.md) is a shorter general explanation you can share with someone applying a similar approach to a different corpus.
-- [RAG validation](rag-validation.md) reports the positive-side validation checks.
-- [Smart-buy definitions and prompts](smart-buy-definitions.md) records the exact terms, prompts, and category definitions.
-- [Worked example: targeted instruction](targeted-instruction-worked-example.md) walks through one category step by step.
-- [Worked example: targeted instruction (short)](targeted-instruction-worked-example-short.md) is a more compact blog-friendly version.
+- `528` English documents
+- `155` French documents
+- `60` Spanish documents
+- `134` countries
+- `561` country-year observations
 
-## Design Principle
+This is not a pure sample of broad national education sector plans. Of the `743` analysed documents, `179` were broad national sector plans and `564` were more specific strategies or action plans on topics such as higher education, emergencies, teacher development, early childhood education, or other sub-sectors.
 
-The main goal of the broader method is not to let an LLM read entire plans from scratch. Instead, the retrieval stage first narrows each document to the most relevant chunks, and only then asks the model to decide whether those chunks really describe the intervention.
+## What We Counted
 
-That makes the broader screen more auditable, cheaper, and easier to validate than a single full-document LLM pass.
+For each document, we searched for substantive mentions of the eight GEEAP smart buys:
+
+- structured pedagogy
+- targeted instruction
+- information on the costs, benefits, or quality of education
+- parent-directed early childhood stimulation
+- quality pre-primary education
+- reducing travel time or cost to school
+- merit scholarships or performance-linked incentives
+- school-based mass deworming
+
+A positive label means the document appears to mention the intervention idea at least once. It does not mean the document cites GEEAP, proves implementation, or shows that the intervention was funded at scale.
+
+## Why We Used RAG
+
+Simple keyword searches were too brittle for this task. They missed plans that described the same idea in different words, and they also produced false positives when broad phrases appeared in unrelated contexts.
+
+We therefore used a retrieval-augmented generation workflow. The aim was not to ask an LLM to read whole documents freely. Instead, the pipeline first found candidate passages, then asked the model to judge whether those passages really matched the smart-buy definition.
+
+## How The RAG Pipeline Worked
+
+Each document was split into overlapping chunks of about `2,200` characters, with `250` characters of overlap.
+
+For each smart buy, candidate chunks were retrieved in two ways:
+
+- **Lexical retrieval:** weighted phrase searches looked for intervention-specific cues and synonyms. Stronger cues counted more than weaker cues.
+- **Semantic retrieval:** embeddings from `text-embedding-3-small` were used to find chunks that were close in meaning to short descriptions of the intervention, even if they did not use the exact search terms.
+
+The pipeline kept the top lexical and semantic hits, added nearby chunks for context, and capped the candidate text sent to the model at `10` chunks per smart buy.
+
+The model review then happened in two stages:
+
+- `gpt-4.1-mini` made the first-pass classification.
+- `gpt-4.1` reviewed positives and uncertain negatives.
+
+The model had to return a structured JSON decision with a label, confidence score, rationale, and a short verbatim quote from the retrieved chunks. If the quoted evidence was not actually present in the retrieved text, the positive label was rejected.
+
+## Language Handling
+
+The English run used English definitions, lexical cues, and semantic retrieval queries.
+
+For French and Spanish, we created language-specific configurations with translated retrieval cues and category definitions. These were tested on small pilot runs before the full run. We tightened the French and Spanish rules where pilot review showed obvious false positives, especially for categories that can blur into nearby concepts:
+
+- generic remediation versus targeted instruction by learning level
+- generic teacher training versus structured pedagogy
+- parent monitoring or school updates versus information for schooling decisions
+- generic family support versus parent-directed early stimulation
+
+The final trilingual figure combines the completed English, French, and Spanish RAG outputs.
+
+## Validation
+
+The validation checks were positive-side checks: we reviewed cases that the method had flagged as smart-buy mentions and judged whether they were real hits. This estimates precision, not recall.
+
+In the main English validation sample, `49` of `53` scored positives were judged correct, giving positive-side precision of `92.5%`. A later focused French spot-check looked at pre-primary and merit-scholarship positives, the categories that seemed easiest to overstate. Combining the English validation and that French spot-check, `61` of `69` scored positives were judged correct, or `88.4%`.
+
+The Spanish run was also manually inspected after completion. Most travel and merit positives looked reasonable, while pre-primary remained broad and the information category looked more permissive. The trilingual chart uses the completed Spanish `v2` output, not a later rerun after that audit.
+
+## Main Caveats
+
+The method is designed to find plausible mentions, not to prove implementation. Sector plans are high-level documents and may omit programmes that governments are actually running.
+
+The validation checks tell us that most reviewed positives were real, but they do not tell us how many true mentions the method missed. This is especially relevant for interventions that may be described in very country-specific language.
+
+Some categories are broader than their short labels. For example, the pre-primary category captures quality-related preschool language, and the merit category can include performance-linked awards or incentives, not only formal scholarship schemes.
+
+Finally, because the sample includes many specialist documents as well as broad national sector plans, the figure should be read as the share of education-planning documents mentioning each concept, not the share of governments formally adopting each smart buy.
+
+## Reproduction Files
+
+Main classifier:
+
+- `code/14_llm_rag_classify.py`
+
+Language-specific configurations:
+
+- `code/best_buy_configs/french_rag_v1.py`
+- `code/best_buy_configs/spanish_rag_v2.py`
+
+Completed RAG outputs:
+
+- `output/nep_counted_llm_rag_full.dta`
+- `output/nep_counted_llm_rag_french_full_v1.dta`
+- `output/nep_counted_llm_rag_spanish_full_v2.dta`
+
+Figure code:
+
+- `code/20_blog_figure_refresh.py`
+- `code/27_rag_french_combined_graphs.py`
+
+More detailed method notes:
+
+- [RAG method](rag-method.md)
+- [RAG validation](rag-validation.md)
+- [Smart-buy definitions and prompts](smart-buy-definitions.md)
