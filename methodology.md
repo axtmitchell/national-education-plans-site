@@ -2,7 +2,7 @@
 
 ## Overview
 
-Each document was split into overlapping chunks of about `2,200` characters, with `250` characters of overlap.
+Each sector plan document was split into overlapping chunks of about `2,200` characters, with `250` characters of overlap.
 
 For each smart buy, candidate chunks were retrieved in two ways:
 
@@ -11,7 +11,7 @@ For each smart buy, candidate chunks were retrieved in two ways:
 
 The pipeline kept the top lexical and semantic hits, added nearby chunks for context.
 
-The model review then happened in two stages:
+Then, the model review then happened in two stages:
 
 - `gpt-4.1-mini` made the first-pass classification.
 - `gpt-4.1` reviewed positives and uncertain negatives.
