@@ -1,6 +1,6 @@
 # Methodology
 
-Overview: The pipeline first found candidate passages, then asked the model to judge whether those passages really matched the smart-buy definition.
+Overview: To find mentions of Smart Buys in the sector plans, we bulit a pipeline that first found candidate passages, then asked an advanced LLM model to judge whether those passages really matched the smart-buy definition.
 
 ## How The RAG Pipeline Worked
 
