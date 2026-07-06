@@ -1,20 +1,3 @@
-# Figure 1 Word-Search Rules
-
-## How To Read The Graph
-
-The current graph has three series:
-
-- `Modern FLN vocabulary`: direct modern terms such as `foundational literacy`, `foundational numeracy`, and `fln`
-- `Basic skills`: older wording for early reading, writing, and math skills
-- `Learning crisis`: direct phrases such as `learning crisis` and `learning poverty`
-
-The earlier broader `Foundational literacy / numeracy` line combined the first two. In other words:
-
-`Foundational literacy / numeracy = Modern FLN vocabulary + Basic skills`
-
-That is why the older broad FLN line can look very similar to the `Basic skills` line in years when modern FLN terminology is still rare.
-
-## Exact Rules By Series
 
 ### Learning Crisis
 
