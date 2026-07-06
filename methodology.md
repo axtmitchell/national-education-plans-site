@@ -40,16 +40,16 @@ Lexical score for a chunk was calculated as `sum(weight x number_of_regex_matche
 
 ### Definitions Used By The Classifier
 
-| Smart buy | English definition | French definition | Spanish definition |
-|---|---|---|---|
-| Information (`bb_info`) | Providing information to families/learners on benefits, costs, or quality of education that changes schooling decisions. | Providing information directly to families, parents, or learners on the benefits, costs, or quality of schooling in order to inform whether, where, or how long children stay in school. Label TRUE only when the policy clearly disseminates decision-relevant information to households or learners; cost tables, budget data, parental monitoring tools, or generic school-life updates are not enough. | Providing information directly to families, parents, or learners on the benefits, costs, or quality of schooling in order to inform whether, where, or how long children stay in school. Label TRUE only when the policy clearly disseminates decision-relevant information to households or learners; cost tables, budget data, parental monitoring tools, or generic school-life updates are not enough. |
-| Structured pedagogy (`bb_structped`) | Structured pedagogy packages with lesson plans/materials and ongoing teacher support. | Structured pedagogy package with classroom guidance/materials plus teacher support. Label TRUE only when the intervention clearly combines at least two core package elements, such as lesson plans, teacher guides, scripted lessons, or teacher-facing materials together with training, coaching, or mentoring. Generic teacher training, manuals, modules, or materials alone are not enough. | Structured pedagogy package with classroom guidance/materials plus teacher support. Label TRUE only when the intervention clearly combines at least two core package elements, such as lesson plans, teacher guides, scripted lessons, or teacher-facing materials together with training, coaching, or mentoring. Generic teacher training, manuals, modules, or materials alone are not enough. |
-| Targeted instruction (`bb_targeted`) | Targeted instruction by learning level (TaRL-style), not by grade only. | Targeted instruction by learning level (TaRL-style), not generic remediation or catch-up support. Label TRUE only when teaching or student grouping is explicitly organized by assessed learning level rather than age or grade only. | Targeted instruction by learning level (TaRL-style), not generic remediation or catch-up support. Label TRUE only when teaching or student grouping is explicitly organized by assessed learning level rather than age or grade only. |
-| Parent-directed early stimulation (`bb_parentstim`) | Parent-directed early childhood stimulation programs (0-36 months). | Parent-directed early childhood stimulation programs (0-36 months). | Parent-directed early childhood stimulation programs (0-36 months). |
-| Quality pre-primary education (`bb_preprimary`) | Quality pre-primary education (ages 3-5). | Quality pre-primary education (ages 3-5). | Quality pre-primary education (ages 3-5). |
-| Reducing travel barriers (`bb_travel`) | Reducing travel time/cost to school. | Reducing travel time/cost to school. | Reducing travel time/cost to school. |
-| Merit scholarships / performance incentives (`bb_merit`) | Merit-based scholarships or performance-linked incentives. | Merit-based scholarships or performance-linked incentives. | Merit-based scholarships or performance-linked incentives. |
-| School-based deworming (`bb_deworm`) | School-based mass deworming where worm-load is high. | School-based mass deworming where worm-load is high. | School-based mass deworming where worm-load is high. |
+| Smart buy | Definition |
+|---|---|
+| Information (`bb_info`) | Providing information to families/learners on benefits, costs, or quality of education that changes schooling decisions. |
+| Structured pedagogy (`bb_structped`) | Structured pedagogy packages with lesson plans/materials and ongoing teacher support. |
+| Targeted instruction (`bb_targeted`) | Targeted instruction by learning level (TaRL-style), not by grade only. |
+| Parent-directed early stimulation (`bb_parentstim`) | Parent-directed early childhood stimulation programs (0-36 months). |
+| Quality pre-primary education (`bb_preprimary`) | Quality pre-primary education (ages 3-5). |
+| Reducing travel barriers (`bb_travel`) | Reducing travel time/cost to school. |
+| Merit scholarships / performance incentives (`bb_merit`) | Merit-based scholarships or performance-linked incentives. |
+| School-based deworming (`bb_deworm`) | School-based mass deworming where worm-load is high. |
 
 ### Lexical Cues And Semantic Queries
 
