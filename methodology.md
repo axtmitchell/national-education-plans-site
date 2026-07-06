@@ -7,7 +7,7 @@ Each sector plan document was split into overlapping chunks of about `2,200` cha
 For each smart buy, candidate chunks were retrieved in two ways:
 
 - **Lexical retrieval:** weighted phrase searches looked for intervention-specific cues and synonyms. Stronger cues counted more than weaker cues. See "Lexical Cues And Semantic Queries" below
-- **Semantic retrieval:** embeddings from `text-embedding-3-small` were used to find chunks that were close in meaning to short descriptions of the intervention, even if they did not use the exact search terms.
+- **Semantic retrieval:** embeddings from Open AI's `text-embedding-3-small` were used to find chunks that were close in meaning to short descriptions of the intervention, even if they did not use the exact search terms.
 
 The pipeline kept the top lexical and semantic hits, added nearby chunks for context.
 
@@ -20,18 +20,18 @@ The model had to return a structured JSON decision with a label, confidence scor
 
 ## Validation
 
-The validation checks were positive-side checks: we reviewed cases that the method had flagged as smart-buy mentions and judged whether they were real hits. This estimates precision, not recall.
+The validation checks were positive-side checks: we reviewed cases that the method had flagged as smart-buy mentions and judged whether they were real hits.
 
 In the validation sample, `61` of `69` (88%) scored positives were judged correct.
 
-## Shared Retrieval Settings
+## Retrieval Settings
 
-- Chunk size: `2,200` characters
+- Text chunk size: `2,200` characters
 - Chunk overlap: `250` characters
-- Lexical candidates kept per smart buy: top `8` chunks with lexical score above zero
-- Semantic candidates kept per smart buy: top `8` chunks by embedding similarity
+- Lexical candidates kept per smart buy per document: top `8` chunks with lexical score above zero
+- Semantic candidates kept per smart buy per document: top `8` chunks by embedding similarity
 - Candidate chunks sent to the model: at most `10`, after ranking the lexical/semantic union and adding neighbouring chunks for context
-- Embedding model: `text-embedding-3-small`
+- Embedding model: Open AI's `text-embedding-3-small`
 - Triage model: `gpt-4.1-mini`
 - Verification model: `gpt-4.1`
 - Verification rule: all positives and negatives with confidence below `0.60` were sent to the stronger model
