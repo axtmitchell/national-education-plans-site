@@ -2,6 +2,7 @@
 
 - [Home](README.md)
 - [Introduction](introduction.md)
+- [Downloadable data](downloadable-data.md)
 - [Findings overview](findings.md)
   - [Government plans and smart buys](government-plans-smart-buys.md)
   - [Blog draft: learning crisis and what works](developing-countries-learning-crisis-draft.md)

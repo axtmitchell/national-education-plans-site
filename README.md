@@ -7,6 +7,7 @@ The site is now organized as plain Markdown rather than Quarto. The GitBook page
 ## What You Will Find Here
 
 - a main findings page on government plans and smart buys
+- downloadable chart data and snippet-search data
 - a French-language extension of the broad search
 - supporting charts for structured pedagogy and targeted instruction
 - a plain-English methodology overview
@@ -17,5 +18,6 @@ The site is now organized as plain Markdown rather than Quarto. The GitBook page
 - page content lives in top-level Markdown files
 - navigation is controlled through `SUMMARY.md`
 - figures used by the pages live in `assets/figures/`
+- public CSVs live in `graph data/`
 
 If you want the quickest route into the substance, start with [Introduction](introduction.md) and [Findings overview](findings.md).
