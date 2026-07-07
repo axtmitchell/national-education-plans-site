@@ -7,9 +7,6 @@ this script writes:
 
 - graph data/sector_plan_search_metadata.csv
 - graph data/sector_plan_search_snippets.csv
-- graph data/sector_plan_rights_audit.csv
-
-Snippets are omitted for documents flagged `link_only` by the rights audit.
 """
 
 from __future__ import annotations
@@ -27,7 +24,6 @@ import pandas as pd
 SITE_ROOT = Path(__file__).resolve().parents[1]
 PROJECT_ROOT = SITE_ROOT.parent
 DEFAULT_SOURCE = PROJECT_ROOT / "output" / "planipolis_merged_excel_text.csv"
-DEFAULT_RIGHTS = PROJECT_ROOT / "output" / "plan_text_rights_audit.csv"
 DEFAULT_OUT_DIR = SITE_ROOT / "graph data"
 
 SNIPPET_CHARS = 420
@@ -66,7 +62,6 @@ TOPIC_PATTERNS = [
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build public metadata and snippet-search CSVs")
     parser.add_argument("--source", default=str(DEFAULT_SOURCE))
-    parser.add_argument("--rights", default=str(DEFAULT_RIGHTS))
     parser.add_argument("--out-dir", default=str(DEFAULT_OUT_DIR))
     return parser.parse_args()
 
@@ -162,42 +157,22 @@ def topic_snippets(text: str) -> list[dict[str, str]]:
     return rows
 
 
-def load_source(source_path: Path, rights_path: Path) -> pd.DataFrame:
+def load_source(source_path: Path) -> pd.DataFrame:
     source = pd.read_csv(source_path, low_memory=False)
     source = source[source["ocr_has_text"].map(to_bool)].copy()
     source["text_clean"] = source["text"].map(clean_text)
     source = source[source["text_clean"].str.len().gt(0)].reset_index(drop=True)
     source["source_row_number"] = range(1, len(source) + 1)
-
-    rights = pd.read_csv(rights_path)
-    if len(source) != len(rights):
-        raise ValueError(
-            f"Source/right audit row mismatch: {len(source)} source rows vs {len(rights)} audit rows"
-        )
-    rights = rights.reset_index(drop=True)
-    keep_rights = [
-        "publication_mode",
-        "signal_class",
-        "signal_name",
-        "confidence",
-        "evidence_location",
-        "evidence_pages",
-        "evidence_snippet",
-    ]
-    for col in keep_rights:
-        source[f"rights_{col}"] = rights[col]
     return source
 
 
-def build_public_files(df: pd.DataFrame, out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def build_public_files(df: pd.DataFrame, out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
     metadata_rows: list[dict[str, object]] = []
     snippet_rows: list[dict[str, object]] = []
-    rights_rows: list[dict[str, object]] = []
 
     for _, row in df.iterrows():
         doc_id = stable_doc_id(row)
         text = row["text_clean"]
-        mode = clean_text(row.get("rights_publication_mode"))
         base = {
             "doc_id": doc_id,
             "title": clean_text(row.get("title")),
@@ -208,7 +183,6 @@ def build_public_files(df: pd.DataFrame, out_dir: Path) -> tuple[pd.DataFrame, p
             "planipolis_page_url": clean_text(row.get("link")),
             "document_url": clean_text(row.get("documents")),
             "local_filename": clean_text(row.get("local_filename")),
-            "rights_publication_mode": mode,
             "source_row_number": int(row.get("source_row_number")),
         }
         metadata_rows.append(
@@ -216,23 +190,8 @@ def build_public_files(df: pd.DataFrame, out_dir: Path) -> tuple[pd.DataFrame, p
                 **base,
                 "word_count": word_count(text),
                 "text_chars": len(text),
-                "has_public_snippets": mode != "link_only",
             }
         )
-        rights_rows.append(
-            {
-                **base,
-                "rights_signal_class": clean_text(row.get("rights_signal_class")),
-                "rights_signal_name": clean_text(row.get("rights_signal_name")),
-                "rights_confidence": clean_text(row.get("rights_confidence")),
-                "rights_evidence_location": clean_text(row.get("rights_evidence_location")),
-                "rights_evidence_pages": clean_text(row.get("rights_evidence_pages")),
-                "rights_evidence_snippet": clean_text(row.get("rights_evidence_snippet")),
-            }
-        )
-
-        if mode == "link_only":
-            continue
 
         snippets = [
             {
@@ -256,23 +215,19 @@ def build_public_files(df: pd.DataFrame, out_dir: Path) -> tuple[pd.DataFrame, p
 
     metadata = pd.DataFrame(metadata_rows).sort_values(["country", "year", "title", "doc_id"])
     snippets = pd.DataFrame(snippet_rows).sort_values(["country", "year", "title", "snippet_id"])
-    rights = pd.DataFrame(rights_rows).sort_values(["country", "year", "title", "doc_id"])
 
     out_dir.mkdir(parents=True, exist_ok=True)
     metadata.to_csv(out_dir / "sector_plan_search_metadata.csv", index=False)
     snippets.to_csv(out_dir / "sector_plan_search_snippets.csv", index=False)
-    rights.to_csv(out_dir / "sector_plan_rights_audit.csv", index=False)
-    return metadata, snippets, rights
+    return metadata, snippets
 
 
 def main() -> int:
     args = parse_args()
-    df = load_source(Path(args.source), Path(args.rights))
-    metadata, snippets, rights = build_public_files(df, Path(args.out_dir))
+    df = load_source(Path(args.source))
+    metadata, snippets = build_public_files(df, Path(args.out_dir))
     print(f"Wrote {len(metadata)} metadata rows")
     print(f"Wrote {len(snippets)} snippet rows")
-    print(f"Wrote {len(rights)} rights-audit rows")
-    print(metadata["rights_publication_mode"].value_counts().to_string())
     return 0
 
 
