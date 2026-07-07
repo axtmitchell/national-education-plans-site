@@ -1,9 +1,5 @@
 # Figure 1 Word-Search Rules
 
-These are the only hard-coded search rules used for:
-
-`government_neglected_topics_trends_lmic_multilingual_fln_explicit_equivalents_learning_crisis.png`
-
 Before matching, text is lowercased, accents are stripped, and minor punctuation variants are ignored.
 
 `n` is the number of LMIC plans in this corpus containing that phrase or rule. Counts overlap.
