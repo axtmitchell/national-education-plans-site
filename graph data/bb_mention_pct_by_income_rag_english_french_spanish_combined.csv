@@ -1,0 +1,17 @@
+best_buy_code,label,income_group,n_mentions,n_documents,percent_documents,plot_order
+bb_preprimary,Preschool,High Income,24,157,15.286624203821656,1
+bb_preprimary,Preschool,Low & Middle Income,194,583,33.27615780445969,1
+bb_merit,Merit Scholarships,High Income,25,157,15.92356687898089,2
+bb_merit,Merit Scholarships,Low & Middle Income,157,583,26.92967409948542,2
+bb_travel,Reduce Travel,High Income,10,157,6.369426751592357,3
+bb_travel,Reduce Travel,Low & Middle Income,81,583,13.893653516295025,3
+bb_structped,Structured Pedagogy,High Income,2,157,1.2738853503184713,4
+bb_structped,Structured Pedagogy,Low & Middle Income,46,583,7.890222984562607,4
+bb_deworm,Mass Deworming,High Income,0,157,0.0,5
+bb_deworm,Mass Deworming,Low & Middle Income,45,583,7.718696397941681,5
+bb_parentstim,Child Stimulation,High Income,3,157,1.910828025477707,6
+bb_parentstim,Child Stimulation,Low & Middle Income,34,583,5.831903945111493,6
+bb_info,Information,High Income,18,157,11.464968152866241,7
+bb_info,Information,Low & Middle Income,19,583,3.2590051457975986,7
+bb_targeted,Targeted Instruction,High Income,3,157,1.910828025477707,8
+bb_targeted,Targeted Instruction,Low & Middle Income,17,583,2.9159519725557463,8
