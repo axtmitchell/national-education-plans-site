@@ -2,14 +2,19 @@
 """
 Create the structured pedagogy and targeted instruction country-year graphs.
 
-Run this after the replication RAG step:
+The default route uses the compact public label file in
+data/replication/trilingual_rag_labels.csv. That makes the published figures
+reproducible without re-downloading and re-processing the full Planipolis PDF
+corpus.
+
+To fully rerun the RAG classifier instead, run:
 
     python analysis/replication_01_clean_data.py --overwrite
     python analysis/replication_02_run_rag.py --yes-run-api
     python analysis/replication_04_make_sp_tarl_country_graphs.py --source replication
 
-By default, the script uses the already completed published RAG outputs so the
-figures can be recreated without rerunning the API classifier.
+The --source published option is retained for the original local analysis
+outputs, which are not included in this public repo.
 """
 
 from __future__ import annotations
@@ -33,6 +38,7 @@ GRID_COLOR = "#DFE0E2"
 FRAME_COLOR = "#5B666A"
 
 INPUTS = {
+    "public": "data/replication/trilingual_rag_labels.csv",
     "published": {
         "English": "output/nep_counted_llm_rag_full.dta",
         "French": "output/nep_counted_llm_rag_french_full_v1.dta",
@@ -245,7 +251,7 @@ def parse_args() -> argparse.Namespace:
         description="Build the structured pedagogy and targeted instruction country-year graphs"
     )
     parser.add_argument("--project-root", default=str(DEFAULT_PROJECT_ROOT))
-    parser.add_argument("--source", choices=sorted(INPUTS), default="published")
+    parser.add_argument("--source", choices=sorted(INPUTS), default="public")
     parser.add_argument("--figures-dir", default="figures")
     parser.add_argument("--tables-dir", default="output")
     return parser.parse_args()
@@ -313,7 +319,6 @@ def country_sort_key(country: str, country_year: pd.DataFrame) -> tuple[int, int
 
 
 def read_inputs(project_root: Path, source: str) -> pd.DataFrame:
-    frames = []
     required_cols = {
         "docid",
         "title",
@@ -324,7 +329,25 @@ def read_inputs(project_root: Path, source: str) -> pd.DataFrame:
         "bb_structped",
         "bb_targeted",
     }
-    for language, rel_path in INPUTS[source].items():
+
+    source_spec = INPUTS[source]
+    if isinstance(source_spec, str):
+        path = project_root / source_spec
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Missing public label file: {path}. "
+                "Download it from data/replication/ or use --source replication after rerunning RAG."
+            )
+        frame = pd.read_csv(path)
+        missing = sorted(required_cols.difference(frame.columns))
+        if missing:
+            raise ValueError(f"{path} is missing required columns: {', '.join(missing)}")
+        if "rag_language_group" not in frame.columns:
+            frame["rag_language_group"] = frame.get("language_group", "Public labels")
+        return frame
+
+    frames = []
+    for language, rel_path in source_spec.items():
         path = project_root / rel_path
         if not path.exists():
             raise FileNotFoundError(

@@ -19,5 +19,6 @@ The site is now organized as plain Markdown rather than Quarto. The GitBook page
 - navigation is controlled through `SUMMARY.md`
 - figures used by the pages live in `assets/figures/`
 - public CSVs live in `graph data/`
+- compact reproduction inputs live in `../data/replication/`
 
 If you want the quickest route into the substance, start with [Introduction](introduction.md) and [Findings overview](findings.md).

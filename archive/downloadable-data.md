@@ -15,3 +15,10 @@ The public data files for this project live in the GitHub folder [`graph data`](
 - [`sector_plan_search_snippets.csv`](<graph data/sector_plan_search_snippets.csv>) provides bounded snippets for search and browsing. It includes opening excerpts and curated topic-match snippets.
 
 The search data intentionally does not publish the full OCR corpus. It provides public metadata, source links, and short excerpts rather than a full-text mirror of the original PDFs.
+
+## Replication Labels
+
+- [`trilingual_rag_labels.csv`](<../data/replication/trilingual_rag_labels.csv>) contains the document-level English, French, and Spanish RAG labels used to reproduce the smart-buy figures without re-downloading Planipolis PDFs.
+- [`trilingual_rag_labels_summary.csv`](<../data/replication/trilingual_rag_labels_summary.csv>) summarizes the number of labelled documents by language.
+
+These files omit the full plan text but retain plan metadata, source URLs, labels, confidence scores, review stages, and short evidence snippets.
